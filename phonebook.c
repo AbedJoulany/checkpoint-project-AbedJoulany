@@ -19,28 +19,51 @@ struct contact* A = NULL;
 
 void clrscr(void);
 void gotoxy(int x, int y);
+/* insert new contact */
 void insert(void);
+/* delete contact */
 void delet(void);
+/* edit contact */
 void edit(void);
+/* show search options*/
 void search(void);
+/* search by first name */
 void searchf(void);
+/* search by last name */
 void searchl(void);
+/* search by telephone */
 void searchp(void);
+/* search by cell phone */
 void searchc(void);
+/* show all */
 void list(void);
+/* print the list after sort */
 void list2(void);
+/* funtion to show sort options */
 void sort(void);
+/* sort by first name */
 void sortf(void);
+/* sort by last name */
 void sortl(void);
+/* sort by telephone */
 void sortp(void);
+/* sort by cellphone */
 void sortc(void);
+/* print help*/
 void help(void);
+/* checking if the contact already exists */
 bool check_contact_exist(struct contact** person);
+/* function to read input from user*/
 void read_input(char* dest, int max);
+/* funtion to add new node to the list */
 void insert_to_list(struct contact** head, struct contact** con);
+/* free the list */
 void free_list(struct contact** head);
+/* function to read the file content */
 void read_contacts_file(char* file_name);
+/* function to ask for deletion to prevent duplicate code */
 int ask_for_delete(struct contact **rear , struct contact **front , int i);
+/* function to swap data */
 void swap(struct contact** a, struct contact **b);
 
 int last;
@@ -190,10 +213,8 @@ void delet(void)
         printf("\t\t\n<<Target contact was successfully deleted from list!>>");
     printf("\n\n\nPress a key to return main page & continue program|-->");
     getc(stdin);
-
-//A = head;
 }
-
+/* function to ask for deletion to prevent duplicate code */
 int ask_for_delete(struct contact **rear , struct contact **front , int i){
     char ch;
     struct contact *temp;
@@ -703,7 +724,7 @@ void gotoxy(int x, int y)
 {
     printf("%c[%d;%df", 0x1B, y, x);
 }
-
+/* checking if the contact already exists */
 bool check_contact_exist(struct contact** person)
 {
     struct contact* head = A;
@@ -718,7 +739,7 @@ bool check_contact_exist(struct contact** person)
     }
     return false;
 }
-
+/* function to read input from user*/
 void read_input(char* dest, int max)
 {
     char *string = NULL;
@@ -737,7 +758,7 @@ void read_input(char* dest, int max)
     strcpy(dest, string);
     free(string);
 }
-
+/* funtion to add new node to the list */
 void insert_to_list(struct contact** head, struct contact** con) {
 
     struct contact *rear = NULL,
@@ -767,7 +788,7 @@ void insert_to_list(struct contact** head, struct contact** con) {
         node->next_fname = front;
     }
 }
-
+/* free the list */
 void free_list(struct contact** head) {
     struct contact *temp = NULL;
 
@@ -777,7 +798,7 @@ void free_list(struct contact** head) {
         free(temp);
     }
 }
-
+/* function to read the file content */
 void read_contacts_file(char *file_name) {
     struct contact *person = NULL;
     FILE *fp;
@@ -793,7 +814,7 @@ void read_contacts_file(char *file_name) {
         perror("Error while opening the file.\n");
         exit(EXIT_FAILURE);
     }
-
+    // reading line then split
     while ((len_size = getline(&line, &len, fp)) != -1) {
         person = (struct contact*) malloc(sizeof(struct contact));
         person->next_fname = NULL;
@@ -815,7 +836,7 @@ void read_contacts_file(char *file_name) {
     if (line)
         free(line);
 }
-
+/* function to swap data */
 void swap(struct contact **a, struct contact **b) {
     char fname[31];
     char lname[31];
